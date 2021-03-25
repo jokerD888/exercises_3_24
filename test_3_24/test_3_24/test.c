@@ -13,6 +13,28 @@
 // 如：
  //      3 2 6 3 5 3 8            中要移除3
 //一开始pr指向3，执行空语句，下一次指向2，执行else语句（用ps在第一个‘3’的位置放入2）,依次往下类推
+int removeElement1(int* nums, int numSize, int val)
+{
+	int start = 0;
+	int i = 0;
+	for (i = 0; i < numSize; i++)
+	{
+		if (nums[i] == val)
+		{
+			start = i;//开始删除，后面的都往前移动一位
+			while (start < numSize - 1)
+			{
+				nums[start] = nums[start + 1];
+				start++;
+			}
+
+			i--;//减一后再加一，再次比较被删除元素的下标现在所对应的元素
+			numSize--;//删除一个，元素个数减一
+		}
+	}
+	return start;
+
+}
 int removeElement(int* nums,int numSize,int val)
 {
 	int* pr = nums;
@@ -33,17 +55,17 @@ int removeElement(int* nums,int numSize,int val)
 	}
 	return j;
 }
-//int main(void)
-//{
-//	int nums[8] = { 0,1,2,2,3,0,4,2 };
-//	int val = 2;
-//	int len= removeElement(nums,8, val);
-//	for (int i = 0; i < len; i++)
-//	{
-//		printf("%d ", nums[i]);
-//	}
-//	return 0;
-//}
+int main(void)
+{
+	int nums[8] = { 0,1,2,2,3,0,4,2 };
+	int val = 2;
+	int len= removeElement1(nums,8, val);
+	for (int i = 0; i < len; i++)
+	{
+		printf("%d ", nums[i]);
+	}
+	return 0;
+}
 
 
 
@@ -75,13 +97,13 @@ int removeDuplicates(int* nums, int numsSize)
 	return j;
 }
 
-int main(void)
-{
-	int nums[14] = { 0,0,0,1,1,1,2,2,3,3,4,5,6,6 };
-	int len = removeDuplicates(nums, 14);
-	for (int i = 0; i < len; i++)
-	{
-		printf("%d ", nums[i]);
-	}
-	return 0;
-}
+//int main(void)
+//{
+//	int nums[14] = { 0,0,0,1,1,1,2,2,3,3,4,5,6,6 };
+//	int len = removeDuplicates(nums, 14);
+//	for (int i = 0; i < len; i++)
+//	{
+//		printf("%d ", nums[i]);
+//	}
+//	return 0;
+//}
