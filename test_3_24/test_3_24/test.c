@@ -22,12 +22,12 @@ int removeElement1(int* nums, int numSize, int val)
 		if (nums[i] == val)
 		{
 			start = i;//开始删除，后面的都往前移动一位
-			while (start < numSize - 1)
+			while (start < numSize-1)
 			{
 				nums[start] = nums[start + 1];
 				start++;
 			}
-
+			
 			i--;//减一后再加一，再次比较被删除元素的下标现在所对应的元素
 			numSize--;//删除一个，元素个数减一
 		}
@@ -55,17 +55,17 @@ int removeElement(int* nums,int numSize,int val)
 	}
 	return j;
 }
-int main(void)
-{
-	int nums[8] = { 0,1,2,2,3,0,4,2 };
-	int val = 2;
-	int len= removeElement1(nums,8, val);
-	for (int i = 0; i < len; i++)
-	{
-		printf("%d ", nums[i]);
-	}
-	return 0;
-}
+//int main(void)
+//{
+//	int nums[8] = { 0,1,2,2,3,0,4,2 };
+//	int val = 2;
+//	int len= removeElement1(nums,8, val);
+//	for (int i = 0; i < len; i++)
+//	{
+//		printf("%d ", nums[i]);
+//	}
+//	return 0;
+//}
 
 
 
@@ -96,14 +96,41 @@ int removeDuplicates(int* nums, int numsSize)
 	}
 	return j;
 }
+int removeDuplicates1(int* nums, int numsSize)
+{
+	if (numsSize == 0)
+		return 0;
+	int prev = 0, cur = 1, dst = 0;
+	while (cur < numsSize)
+	{
+		if (nums[prev] != nums[cur])
+		{
+			nums[dst] = nums[prev];
+			prev++;
+			cur++;
+			dst++;
+		}
+		else
+		{
+			prev++;
+			cur++;
+		}
+	}
+	//最后一个元素还没有进行判断
+	nums[dst] = nums[prev];
+	dst++;
+	prev++;
 
-//int main(void)
-//{
-//	int nums[14] = { 0,0,0,1,1,1,2,2,3,3,4,5,6,6 };
-//	int len = removeDuplicates(nums, 14);
-//	for (int i = 0; i < len; i++)
-//	{
-//		printf("%d ", nums[i]);
-//	}
-//	return 0;
-//}
+	return dst;
+}
+
+int main(void)
+{
+	int nums[14] = { 0,0,0,1,1,1,2,2,3,3,4,5,6,6 };
+	int len = removeDuplicates(nums, 14);
+	for (int i = 0; i < len; i++)
+	{
+		printf("%d ", nums[i]);
+	}
+	return 0;
+}
